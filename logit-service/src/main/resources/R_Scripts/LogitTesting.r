@@ -1,9 +1,11 @@
+library(nnet)
+
 args <- commandArgs(TRUE)
 dataset <- read.csv(args[1])
 modelFile <- args[2]
 outputType <- args[3]
 load(modelFile)
-pred_label <- round(predict(LogitModel, newdata = dataset, type = "response"))
+pred_label <- predict(LogitModel, newdata = dataset, type = "class")
 if(outputType == 'predictions') {
     print(pred_label)
 } else if(outputType == 'confusion_matrix') {
